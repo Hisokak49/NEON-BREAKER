@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON BREAKER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="glow-blob cyan"></div>
+  <div class="glow-blob pink"></div>
+
+  <div id="customCursor"></div>
+
+  <div id="app">
+
+    <!-- Game (pushes to background when menus open) -->
+    <div id="gameWrapper">
+      <div id="hud">
+        <div class="hud-group">
+          <div class="hud-item">
+            <div class="hud-label">Score</div>
+            <div class="hud-value score" id="hudScore">0</div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-label">Combo</div>
+            <div class="hud-value combo" id="hudCombo">--</div>
+          </div>
+        </div>
+        <div class="hud-group">
+          <div class="hud-item">
+            <div class="hud-label">Best</div>
+            <div class="hud-value high" id="hudHigh">0</div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-label">Level</div>
+            <div class="hud-value level" id="hudLevel">1</div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-label">Lives</div>
+            <div class="hud-value lives" id="hudLives">3</div>
+          </div>
+        </div>
+      </div>
+      <div id="canvasContainer">
+        <canvas id="gameCanvas" width="780" height="560"></canvas>
+        <div id="comboToast"></div>
+      </div>
+    </div>
+
+    <!-- ── Panels ── -->
+
+    <!-- Main Menu -->
+    <div class="panel" id="menuPanel">
+      <div class="panel-card menu-card">
+        <div class="menu-tagline" id="menuTagline"></div>
+        <h1 class="menu-title">NEON BREAKER</h1>
+        <div class="menu-best" id="menuBest"></div>
+        <button class="btn btn-primary" id="btnPlay">PLAY</button>
+        <button class="btn btn-ghost" id="btnMenuOptions">OPTIONS</button>
+        <div class="menu-footer">
+          <div class="menu-controls">
+            <span class="kbd">MOUSE</span> move
+            <span class="kbd">CLICK</span> launch
+            <span class="kbd">ESC</span> pause
+          </div>
+          <div class="menu-version">v1.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause -->
+    <div class="panel" id="pausePanel">
+      <div class="panel-card pause-card">
+        <h2 class="panel-title">PAUSED</h2>
+        <button class="btn btn-primary" id="btnResume">RESUME</button>
+        <button class="btn btn-ghost" id="btnPauseOptions">OPTIONS</button>
+        <button class="btn btn-danger" id="btnQuit">QUIT TO MENU</button>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="panel" id="optionsPanel">
+      <div class="panel-card options-card">
+        <h2 class="panel-title">OPTIONS</h2>
+        <div class="opt-group">
+          <label class="opt-label">Master Volume</label>
+          <div class="opt-row">
+            <input type="range" class="opt-slider" id="optMasterVol" min="0" max="100" value="70">
+            <span class="opt-val" id="optMasterVolVal">70%</span>
+          </div>
+        </div>
+        <div class="opt-group">
+          <label class="opt-label">SFX Volume</label>
+          <div class="opt-row">
+            <input type="range" class="opt-slider" id="optSfxVol" min="0" max="100" value="80">
+            <span class="opt-val" id="optSfxVolVal">80%</span>
+          </div>
+        </div>
+        <div class="opt-divider"></div>
+        <div class="opt-group">
+          <div class="opt-toggle-row">
+            <label class="opt-label" for="optShake">Screen Shake</label>
+            <label class="toggle"><input type="checkbox" id="optShake" checked><span class="toggle-track"></span></label>
+          </div>
+          <div class="opt-toggle-row">
+            <label class="opt-label" for="optParticles">Particles</label>
+            <label class="toggle"><input type="checkbox" id="optParticles" checked><span class="toggle-track"></span></label>
+          </div>
+          <div class="opt-toggle-row">
+            <label class="opt-label" for="optScanlines">Scanlines</label>
+            <label class="toggle"><input type="checkbox" id="optScanlines" checked><span class="toggle-track"></span></label>
+          </div>
+          <div class="opt-toggle-row">
+            <label class="opt-label" for="optTrail">Ball Trail</label>
+            <label class="toggle"><input type="checkbox" id="optTrail" checked><span class="toggle-track"></span></label>
+          </div>
+          <div class="opt-toggle-row">
+            <label class="opt-label" for="optEdgeGlow">Edge Glow</label>
+            <label class="toggle"><input type="checkbox" id="optEdgeGlow" checked><span class="toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="opt-divider"></div>
+        <button class="btn btn-danger btn-sm" id="btnResetHigh">RESET HIGH SCORE</button>
+        <button class="btn btn-primary" id="btnOptionsBack">BACK</button>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div class="panel" id="gameOverPanel">
+      <div class="panel-card end-card">
+        <div class="end-message" id="goMessage"></div>
+        <h2 class="panel-title panel-title--pink">GAME OVER</h2>
+        <div class="end-score" id="goScore"></div>
+        <div class="end-stats" id="goStats"></div>
+        <button class="btn btn-primary" id="btnRetry">TRY AGAIN</button>
+        <button class="btn btn-ghost" id="btnGoMenu">MENU</button>
+      </div>
+    </div>
+
+    <!-- Victory -->
+    <div class="panel" id="victoryPanel">
+      <div class="panel-card end-card">
+        <h2 class="panel-title panel-title--green">LEVEL CLEAR</h2>
+        <div class="end-sub" id="vicSub"></div>
+        <div class="end-score" id="vicScore"></div>
+        <div class="end-stats" id="vicStats"></div>
+        <button class="btn btn-primary" id="btnNext">NEXT LEVEL</button>
+        <button class="btn btn-ghost" id="btnVicMenu">MENU</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
