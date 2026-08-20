@@ -14,21 +14,21 @@
   <div class="glow-blob cyan"></div>
   <div class="glow-blob pink"></div>
 
-  <div id="customCursor"></div>
+  <div id="customCursor" aria-hidden="true"></div>
 
   <div id="app">
 
     <!-- Game (pushes to background when menus open) -->
     <div id="gameWrapper">
-      <div id="hud">
+      <div id="hud" aria-label="Game status">
         <div class="hud-group">
           <div class="hud-item">
             <div class="hud-label">Score</div>
-            <div class="hud-value score" id="hudScore">0</div>
+            <div class="hud-value score" id="hudScore" aria-live="polite">0</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">Combo</div>
-            <div class="hud-value combo" id="hudCombo">--</div>
+            <div class="hud-value combo" id="hudCombo" aria-live="polite">--</div>
           </div>
         </div>
         <div class="hud-group">
@@ -38,17 +38,17 @@
           </div>
           <div class="hud-item">
             <div class="hud-label">Level</div>
-            <div class="hud-value level" id="hudLevel">1</div>
+            <div class="hud-value level" id="hudLevel" aria-live="polite">1</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">Lives</div>
-            <div class="hud-value lives" id="hudLives">3</div>
+            <div class="hud-value lives" id="hudLives" aria-live="polite">3</div>
           </div>
         </div>
       </div>
       <div id="canvasContainer">
-        <canvas id="gameCanvas" width="780" height="560"></canvas>
-        <div id="comboToast"></div>
+        <canvas id="gameCanvas" width="780" height="560" role="img" aria-label="NEON BREAKER game board. Use your mouse or touch to move the paddle and break the bricks."></canvas>
+        <div id="comboToast" role="status" aria-live="polite" aria-atomic="true"></div>
       </div>
     </div>
 
@@ -57,9 +57,9 @@
     <!-- Main Menu -->
     <div class="panel" id="menuPanel">
       <div class="panel-card menu-card">
-        <div class="menu-tagline" id="menuTagline"></div>
+        <div class="menu-tagline" id="menuTagline" aria-live="polite"></div>
         <h1 class="menu-title">NEON BREAKER</h1>
-        <div class="menu-best" id="menuBest"></div>
+        <div class="menu-best" id="menuBest" aria-label="Best score"></div>
         <button class="btn btn-primary" id="btnPlay">PLAY</button>
         <button class="btn btn-ghost" id="btnMenuOptions">OPTIONS</button>
         <div class="menu-footer">
@@ -89,16 +89,16 @@
       <div class="panel-card options-card">
         <h2 class="panel-title">OPTIONS</h2>
         <div class="opt-group">
-          <label class="opt-label">Master Volume</label>
+          <label class="opt-label" for="optMasterVol">Master Volume</label>
           <div class="opt-row">
-            <input type="range" class="opt-slider" id="optMasterVol" min="0" max="100" value="70">
+            <input type="range" class="opt-slider" id="optMasterVol" min="0" max="100" value="70" aria-label="Master volume">
             <span class="opt-val" id="optMasterVolVal">70%</span>
           </div>
         </div>
         <div class="opt-group">
-          <label class="opt-label">SFX Volume</label>
+          <label class="opt-label" for="optSfxVol">SFX Volume</label>
           <div class="opt-row">
-            <input type="range" class="opt-slider" id="optSfxVol" min="0" max="100" value="80">
+            <input type="range" class="opt-slider" id="optSfxVol" min="0" max="100" value="80" aria-label="Sound effects volume">
             <span class="opt-val" id="optSfxVolVal">80%</span>
           </div>
         </div>
@@ -134,9 +134,9 @@
     <!-- Game Over -->
     <div class="panel" id="gameOverPanel">
       <div class="panel-card end-card">
-        <div class="end-message" id="goMessage"></div>
+        <div class="end-message" id="goMessage" aria-live="polite"></div>
         <h2 class="panel-title panel-title--pink">GAME OVER</h2>
-        <div class="end-score" id="goScore"></div>
+        <div class="end-score" id="goScore" aria-label="Final score"></div>
         <div class="end-stats" id="goStats"></div>
         <button class="btn btn-primary" id="btnRetry">TRY AGAIN</button>
         <button class="btn btn-ghost" id="btnGoMenu">MENU</button>
@@ -147,8 +147,8 @@
     <div class="panel" id="victoryPanel">
       <div class="panel-card end-card">
         <h2 class="panel-title panel-title--green">LEVEL CLEAR</h2>
-        <div class="end-sub" id="vicSub"></div>
-        <div class="end-score" id="vicScore"></div>
+        <div class="end-sub" id="vicSub" aria-live="polite"></div>
+        <div class="end-score" id="vicScore" aria-label="Final score"></div>
         <div class="end-stats" id="vicStats"></div>
         <button class="btn btn-primary" id="btnNext">NEXT LEVEL</button>
         <button class="btn btn-ghost" id="btnVicMenu">MENU</button>
